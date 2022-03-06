@@ -262,7 +262,7 @@ let locationDisplay (lr: LocationResponse) =
                     //   Fill in the region, found in the LocationResponse
                     //   Replace the string "TODO" with lr.Location and
                     //   then hit "." to look for the Region
-                    td "TODO"
+                    td lr.Location.Region
                 ]
                 tr [
                     // Task 1.3a
