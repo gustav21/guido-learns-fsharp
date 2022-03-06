@@ -269,7 +269,7 @@ let locationDisplay (lr: LocationResponse) =
                     //   Heathrow is on plague island! Don't fly there!
                     //   Change Heathrow to Schiphol!
                     //   Then search for DistanceToAirport and find where it's calculated
-                    th "Distance to Heathrow"
+                    th "Distance to Schiphol"
                     td $"%.2f{lr.DistanceToAirport}km"
                 ]
             ]
