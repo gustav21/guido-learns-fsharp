@@ -210,16 +210,12 @@ let makeMarker (latitude, longitude)  =
 
 let mapDisplay (lr: LocationResponse) =
     PigeonMaps.map [
-        // Task 2.2:
-        //    Set the center of the map.
-        //    Use the 'map.center' function and supply the lat/long value as input.
-        //    These come from the LocationResponse.
-
-        // Task 2.3 Update the Zoom to 15.
-        map.zoom 12
+        let coords = lr.Location.LatLong.Latitude, lr.Location.LatLong.Longitude
+        map.center coords
+        map.zoom 15
         map.height 500
         map.markers [
-            // Task 2.4 Create a marker for the map. Use the makeMarker function above.
+            makeMarker coords
         ]
     ]
 
@@ -424,11 +420,7 @@ let destinationInfoSection idx (model: Destination) =
                         //     Create this using weatherDisplay, which takes a WeatherResponse
                         //     This can be found in the overall server response.
                     ]
-                    // Task 2.1
-                    //   Problem - we would like to add maps for each stop
-                    //   Approach:
-                    //     Add the map widget, created using "mapDisplay".
-                    //     This takes a LocationResponse, found in the overall server response *)
+                    mapDisplay response.Location
                 ]
             ]
         ]
