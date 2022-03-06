@@ -282,6 +282,10 @@ let locationDisplay (lr: LocationResponse) =
 let adjective idx =
     match idx+1 with
     | 1 -> "First"
+    | n when [11; 12; 13] |> List.contains (n % 100) -> string n + "th"
+    | n when (n % 10) = 1 -> string n + "st"
+    | n when (n % 10) = 2 -> string n + "nd"
+    | n when (n % 10) = 3 -> string n + "rd"
     | n -> string n + "th"
 
 let destinationEntrySection idx (destination: Destination) dispatch =
