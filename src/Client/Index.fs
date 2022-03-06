@@ -19,8 +19,7 @@ let country = "NL"
 type ServerResponse =
     {
       Location: LocationResponse
-      // Task 3.1b When we fetch data from the server, also get the weather
-      //           Add a 'Weather' field here of type 'WeatherResponse'
+      Weather: WeatherResponse
     }
 
 type ServerState =
@@ -92,17 +91,11 @@ let dojoApi =
 
 let getResponse destinationText = async {
     let! location = dojoApi.GetLocation destinationText
-     // Task 3.1d
-     //   When we fetch data from the server, also get the weather.
-     //   Use 'let! weather = ... GetWeather' here.
-     //   The call is asynchronous, so you'll need to use 'let!' to
-     //   await the result of the call.
+    let! weather = dojoApi.GetWeather destinationText
     let response =
         {
           Location = location
-          // Task 3.1c
-          //   Return the weather as part of the overall response
-          //   Use 'Weather = weather' like 'Location = location'
+          Weather = weather
         }
     return response }
 
@@ -236,9 +229,7 @@ let weatherDisplay (wr: WeatherResponse) =
                 tbody [
                     tr [
                         th "Temp"
-                        // Task 3.3 Fill in the temperature, the right number is
-                        //          available in the WeatherResponse
-                        td $"%.1f{3.00000}"
+                        td $"%.1f{wr.AverageTemperature}"
                     ]
                 ]
             ]
@@ -413,12 +404,11 @@ let destinationInfoSection idx (model: Destination) =
                                 locationDisplay response.Location
                             ]
                         ]
-                        // Task 3.2
-                        //   Problem: We need to display weather
-                        //   Approach:
-                        //     Add a second column containing the weather information.
-                        //     Create this using weatherDisplay, which takes a WeatherResponse
-                        //     This can be found in the overall server response.
+                        column [
+                            prop.children [
+                                weatherDisplay response.Weather
+                            ]
+                        ]
                     ]
                     mapDisplay response.Location
                 ]
