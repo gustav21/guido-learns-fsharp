@@ -346,7 +346,7 @@ let destinationEntrySection idx (destination: Destination) dispatch =
                                  //   Try an incorrect postcode. The color of the
                                  //   help text is wrong!!
                                  //   Correct this to color.isDanger
-                                 color.isPrimary
+                                 color.isDanger
                                  prop.text error
                         ]
                     ]
